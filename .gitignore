@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Mybatis generator###
+**/src/main/java/com/uyou/dao/**
+**/src/main/java/com/uyou/entity/**
+**/src/main/resources/mybatis/mapper/**

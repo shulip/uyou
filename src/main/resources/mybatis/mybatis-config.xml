@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <typeAliases>
+        <package name="com.uyou.entity"/>
+    </typeAliases>
+    <mappers>
+        <!-- 添加自定义 Mapper 需要在这里配置其位置，如： -->
+        <mapper resource="mapper/*"/>
+        <!-- <mapper resource="mapper/WorkHelperMapper.xml"/>-->
+    </mappers>
+</configuration>

@@ -79,27 +79,22 @@
                selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
-        <table tableName="game_project" domainObjectName="Game_project" enableCountByExample="false"
+        <table tableName="project" domainObjectName="Project" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
-        <table tableName="game_type_name" domainObjectName="Game_type_name" enableCountByExample="false"
+        <table tableName="game_type" domainObjectName="GameType" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
-        <table tableName="project_id_to_game_type" domainObjectName="Project_id_to_game_type" enableCountByExample="false"
+        <table tableName="producer_type" domainObjectName="ProducerType" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
-        <table tableName="project_id_to_producer_type" domainObjectName="Project_id_to_producer_type" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="project_producer" domainObjectName="Project_producer" enableCountByExample="false"
+        <table tableName="project_producer" domainObjectName="ProjectProducer" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>

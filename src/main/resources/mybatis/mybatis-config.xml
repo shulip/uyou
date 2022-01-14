@@ -5,13 +5,16 @@
 <configuration>
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="cacheEnabled" value="true"/>
     </settings>
-    <typeAliases>
-        <package name="com.uyou.entity"/>
-    </typeAliases>
-    <mappers>
-        <!-- 添加自定义 Mapper 需要在这里配置其位置，如： -->
-        <mapper resource="mapper/*"/>
-        <!-- <mapper resource="mapper/WorkHelperMapper.xml"/>-->
-    </mappers>
+<!--    <typeAliases>-->
+<!--        <package name="com.uyou.entity"/>-->
+<!--    </typeAliases>-->
+<!--    <mappers>-->
+<!--        &lt;!&ndash; 添加自定义 Mapper 需要在这里配置其位置，如： &ndash;&gt;-->
+<!--&lt;!&ndash;        <mapper resource="com"/>&ndash;&gt;-->
+<!--        <mapper resource="classpath:mybatis/mapper/**"/>-->
+<!--        <mapper resource="classpath:mybatis/helperMapper/**"/>-->
+<!--        &lt;!&ndash; <mapper resource="mapper/WorkHelperMapper.xml"/>&ndash;&gt;-->
+<!--    </mappers>-->
 </configuration>

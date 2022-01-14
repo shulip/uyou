@@ -1,5 +1,7 @@
 package com.uyou.utils;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -7,6 +9,7 @@ import java.io.Serializable;
  * @createdAt 2022/1/12 14:04
  * @description
  */
+@Data
 public class ResultWrapper implements Serializable {
     /**
      * 200为正常，其余为异常
@@ -26,14 +29,14 @@ public class ResultWrapper implements Serializable {
      * @param data 传入的数据
      */
     public ResultWrapper(Object data) {
-        this(0, data, "");
+        this(200, data, "");
     }
 
     /**
      * 正常情况下仅返回成功状态
      */
     public ResultWrapper() {
-        this(0, null, "");
+        this(200, null, "");
     }
 
     /**

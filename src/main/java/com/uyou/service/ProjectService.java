@@ -1,6 +1,8 @@
 package com.uyou.service;
 
+import com.uyou.dto.ProjectAllDTO;
 import com.uyou.dto.ProjectCreateDTO;
+import com.uyou.dto.ProjectDetailDTO;
 import com.uyou.dto.ProjectSelfDTO;
 
 /**
@@ -13,5 +15,9 @@ public interface ProjectService {
 
     public boolean joinProject(int userId,int projectId, String producerType);
 
+    public ProjectAllDTO getAllProject();
+
     public ProjectSelfDTO getSelfProject(Integer id);
+
+    public ProjectDetailDTO getDetailProject(Integer projectId);
 }

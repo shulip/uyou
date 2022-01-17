@@ -14,4 +14,5 @@ import java.util.List;
 @Mapper
 public interface ProjectProducerHelperMapper {
     List<ProjectProducer> selectByProducerId(@Param("producerId") Integer producerId);
+    List<ProjectProducer> selectByProjectId(@Param("producerId") Integer projectId);
 }

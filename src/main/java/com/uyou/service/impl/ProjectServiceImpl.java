@@ -6,19 +6,12 @@ package com.uyou.service.impl;
  * @description
  */
 
-import com.uyou.dao.GameTypeMapper;
-import com.uyou.dao.ProducerTypeMapper;
-import com.uyou.dao.ProjectMapper;
-import com.uyou.dao.ProjectProducerMapper;
-import com.uyou.dto.ProjectCreateDTO;
-import com.uyou.dto.ProjectDTO;
-import com.uyou.dto.ProjectSelfDTO;
-import com.uyou.entity.GameType;
-import com.uyou.entity.ProducerType;
-import com.uyou.entity.Project;
-import com.uyou.entity.ProjectProducer;
+import com.uyou.dao.*;
+import com.uyou.dto.*;
+import com.uyou.entity.*;
 import com.uyou.helperDao.GameTypeHelperMapper;
 import com.uyou.helperDao.ProducerTypeHelperMapper;
+import com.uyou.helperDao.ProjectHelperMapper;
 import com.uyou.helperDao.ProjectProducerHelperMapper;
 import com.uyou.service.ProjectService;
 import com.uyou.utils.IdGenerator;
@@ -27,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -39,12 +33,17 @@ public class ProjectServiceImpl implements ProjectService {
     private ProducerTypeMapper producerTypeMapper;
     @Resource
     private ProjectProducerMapper projectProducerMapper;
+    @Resource
+    private UserMapper userMapper;
     @Autowired
     private ProducerTypeHelperMapper producerTypeHelperMapper;
     @Autowired
     private ProjectProducerHelperMapper projectProducerHelperMapper;
     @Autowired
     private GameTypeHelperMapper gameTypeHelperMapper;
+    @Autowired
+    private ProjectHelperMapper projectHelperMapper;
+
 
     /**
      * @param projectCreateDTO
@@ -54,6 +53,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public boolean createProject(ProjectCreateDTO projectCreateDTO) {
         int projectId = IdGenerator.getDateId();
+        System.out.println(projectId);
         Project project = projectCreateDTO.getProject();
         project.setId(projectId);
 
@@ -94,11 +94,29 @@ public class ProjectServiceImpl implements ProjectService {
             ProjectProducer projectProducer = new ProjectProducer();
             projectProducer.setProducerId(userId);
             projectProducer.setGameId(projectId);
-            projectProducer.setIsCreator(false);
+            //projectProducer.setIsCreator(false);
             projectProducerMapper.insert(projectProducer);
             return true;
         }
         return false;
+    }
+
+    /**
+     * @return
+     * @author yjzhang
+     */
+    @Override
+    public ProjectAllDTO getAllProject() {
+        ProjectAllDTO projectAllDTO = new ProjectAllDTO();
+        List<ProjectDTO> allProject = new ArrayList<>();
+        List<Project> projects = projectHelperMapper.selectAll();
+        for(Project project:projects){
+            List<String> gameTypes = gameTypeHelperMapper.selectTypeByGameId(project.getId());
+            ProjectDTO projectDTO = ProjectDTO.fromProject(project);
+            projectDTO.setGameType(gameTypes);
+        }
+        projectAllDTO.setAllProject(allProject);
+        return projectAllDTO;
     }
 
     /**
@@ -130,5 +148,42 @@ public class ProjectServiceImpl implements ProjectService {
         projectSelfDTO.setCreate(create);
         projectSelfDTO.setJoin(join);
         return projectSelfDTO;
+    }
+
+    /**
+     * @return
+     * @author yjzhang
+     */
+    @Override
+    public ProjectDetailDTO getDetailProject(Integer projectId){
+
+        ProjectDetailDTO projectDetailDTO = new ProjectDetailDTO();
+        Project project = projectMapper.selectByPrimaryKey(projectId);
+        ProjectDTO projectDTO = ProjectDTO.fromProject(project);
+        List<String> gameTypes = gameTypeHelperMapper.selectTypeByGameId(projectId);
+        projectDTO.setGameType(gameTypes);
+        projectDetailDTO.setProjectDTO(projectDTO);
+
+        List<ProducerTypeDetailDTO> producerTypes = new ArrayList<>();
+        List<ProducerType> allProducerType = producerTypeHelperMapper.selectByProjectId(projectId);
+        HashMap<String,Integer> typeId = new HashMap<>();
+        for(ProducerType producerType : allProducerType){
+            String type = producerType.getProducerType();
+            typeId.put(type, producerTypes.size());
+            ProducerTypeDetailDTO producerTypeDetailDTO = new ProducerTypeDetailDTO(
+                    type, producerType.getNeededNumber(),
+                    producerType.getNowNumber(),new ArrayList<>());
+            producerTypes.add(producerTypeDetailDTO);
+        }
+        List<ProjectProducer> projectProducers = projectProducerHelperMapper.selectByProjectId(projectId);
+        for(ProjectProducer projectProducer : projectProducers){
+            Integer id = projectProducer.getProducerId();
+            User user = userMapper.selectByPrimaryKey(id);
+            UserDTO userDTO = new UserDTO(id, user.getName());
+            String type = projectProducer.getProducerType();
+            producerTypes.get(typeId.get(type)).getMembers().add(userDTO);
+        }
+        projectDetailDTO.setProducerTypes(producerTypes);
+        return projectDetailDTO;
     }
 }

@@ -53,7 +53,6 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public boolean createProject(ProjectCreateDTO projectCreateDTO) {
         int projectId = IdGenerator.getDateId();
-        System.out.println(projectId);
         Project project = projectCreateDTO.getProject();
         project.setId(projectId);
 
@@ -94,7 +93,7 @@ public class ProjectServiceImpl implements ProjectService {
             ProjectProducer projectProducer = new ProjectProducer();
             projectProducer.setProducerId(userId);
             projectProducer.setGameId(projectId);
-            //projectProducer.setIsCreator(false);
+            projectProducer.setIsCreator(false);
             projectProducerMapper.insert(projectProducer);
             return true;
         }
@@ -151,7 +150,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     /**
-     * @return
+     * @param projectId
      * @author yjzhang
      */
     @Override
@@ -179,9 +178,9 @@ public class ProjectServiceImpl implements ProjectService {
         for(ProjectProducer projectProducer : projectProducers){
             Integer id = projectProducer.getProducerId();
             User user = userMapper.selectByPrimaryKey(id);
-            UserDTO userDTO = new UserDTO(id, user.getName());
+            UserDTO2 userDTO2 = new UserDTO2(id, user.getName());
             String type = projectProducer.getProducerType();
-            producerTypes.get(typeId.get(type)).getMembers().add(userDTO);
+            producerTypes.get(typeId.get(type)).getMembers().add(userDTO2);
         }
         projectDetailDTO.setProducerTypes(producerTypes);
         return projectDetailDTO;

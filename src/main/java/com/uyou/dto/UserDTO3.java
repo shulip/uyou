@@ -5,19 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author yjzhang
- * @createdAt 1/16
+ * @createdAt 1/17
  * @description
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProducerTypeDetailDTO implements Serializable {
-    private String producerType;
-    private Integer neededNumber;
-    private Integer nowNumber;
-    List<UserDTO2> members;
+public class UserDTO3 implements Serializable {//3表示3个属性
+    private Integer id;
+    private String name;
+    private String type;
 }

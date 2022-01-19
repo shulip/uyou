@@ -13,11 +13,11 @@ import com.uyou.dto.ProjectSelfDTO;
 public interface ProjectService {
     public boolean createProject(ProjectCreateDTO projectCreateDTO);
 
-    public boolean joinProject(int userId,int projectId, String producerType);
+    public boolean joinProject(int projectId, String producerType);
 
     public ProjectAllDTO getAllProject();
 
-    public ProjectSelfDTO getSelfProject(Integer id);
+    public ProjectSelfDTO getSelfProject();
 
     public ProjectDetailDTO getDetailProject(Integer projectId);
 }

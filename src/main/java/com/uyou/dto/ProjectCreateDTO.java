@@ -25,7 +25,6 @@ public class ProjectCreateDTO implements Serializable {
     private String description;
     private List<String> gameType;
     private List<ProducerTypeDTO> producerTypes;
-    private Integer creatorId;
 
     public Project getProject() {
         Project project = new Project();
@@ -65,7 +64,6 @@ public class ProjectCreateDTO implements Serializable {
 
     public ProjectProducer getProjectProducer(int projectId){
         ProjectProducer projectProducer = new ProjectProducer();
-        projectProducer.setProducerId(creatorId);
         projectProducer.setGameId(projectId);
         projectProducer.setIsCreator(true);
         return projectProducer;

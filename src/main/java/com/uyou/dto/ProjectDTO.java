@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author zxwang
@@ -28,5 +29,18 @@ public class ProjectDTO implements Serializable {
         projectDTO.setName(project.getName());
         projectDTO.setDescription(project.getDescription());
         return projectDTO;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProjectDTO that = (ProjectDTO) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

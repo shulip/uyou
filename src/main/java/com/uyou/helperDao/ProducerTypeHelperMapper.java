@@ -13,6 +13,9 @@ import java.util.List;
  */
 @Mapper
 public interface ProducerTypeHelperMapper {
-    ProducerType selectByProjectIdProducerType(@Param("projectId")int projectId, @Param("producerType")String producerType);
-    List<ProducerType> selectByProjectId(@Param("projectId")int projectId);
+    ProducerType selectByProjectIdProducerType(@Param("projectId") int projectId, @Param("producerType") String producerType);
+
+    List<ProducerType> selectByProjectId(@Param("projectId") int projectId);
+
+    int getIdByProjectIdType(@Param("projectId")int projectId,@Param("producerType") String producerType);
 }

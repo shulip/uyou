@@ -29,8 +29,8 @@ public class ProjectController {
     }
 
     @PutMapping("/join")
-    public ResultWrapper joinProject(@RequestParam int userId, @RequestParam int projectId, @RequestParam String producerType) {
-        if (projectService.joinProject(userId, projectId, producerType)){
+    public ResultWrapper joinProject(@RequestParam int projectId, @RequestParam String producerType) {
+        if (projectService.joinProject(projectId, producerType)){
             return new ResultWrapper();
         }
         return new ResultWrapper(100,"人员已满");
@@ -43,8 +43,8 @@ public class ProjectController {
     }
 
     @GetMapping("/my")
-    public ResultWrapper getSelfProject(@RequestParam Integer id){
-        ProjectSelfDTO selfProject = projectService.getSelfProject(id);
+    public ResultWrapper getSelfProject(){
+        ProjectSelfDTO selfProject = projectService.getSelfProject();
         return new ResultWrapper(selfProject);
     }
 

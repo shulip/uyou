@@ -6,6 +6,7 @@ package com.uyou.service.impl;
  * @description
  */
 
+import com.uyou.core.entity.UserSecurity;
 import com.uyou.dao.*;
 import com.uyou.dto.*;
 import com.uyou.entity.*;
@@ -16,11 +17,13 @@ import com.uyou.helperDao.ProjectProducerHelperMapper;
 import com.uyou.service.ProjectService;
 import com.uyou.utils.IdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 @Service
@@ -52,6 +55,9 @@ public class ProjectServiceImpl implements ProjectService {
      */
     @Override
     public boolean createProject(ProjectCreateDTO projectCreateDTO) {
+        UserSecurity principal = (UserSecurity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        int userId = principal.getId();
+
         int projectId = IdGenerator.getDateId();
         Project project = projectCreateDTO.getProject();
         project.setId(projectId);
@@ -61,6 +67,7 @@ public class ProjectServiceImpl implements ProjectService {
         List<ProducerType> producerTypeList = projectCreateDTO.getProducerType(projectId);
 
         ProjectProducer projectProducer = projectCreateDTO.getProjectProducer(projectId);
+        projectProducer.setProducerId(userId);
         projectMapper.insert(project);
 
         for (GameType gameType : gameTypeList) {
@@ -77,14 +84,15 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     /**
-     * @param userId
      * @param projectId
      * @param producerTypeStr
      * @return
      * @author zxwang
      */
     @Override
-    public boolean joinProject(int userId, int projectId, String producerTypeStr) {
+    public boolean joinProject(int projectId, String producerTypeStr) {
+        UserSecurity principal = (UserSecurity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        int userId = principal.getId();
         ProducerType producerType = producerTypeHelperMapper.selectByProjectIdProducerType(projectId, producerTypeStr);
         if (producerType.getNeededNumber() >= producerType.getNowNumber()) {
             producerType.setNowNumber(producerType.getNowNumber() + 1);
@@ -94,6 +102,8 @@ public class ProjectServiceImpl implements ProjectService {
             projectProducer.setProducerId(userId);
             projectProducer.setGameId(projectId);
             projectProducer.setIsCreator(false);
+            projectProducer.setProducerTypeId(producerType.getId());
+            projectProducer.setProducerType(producerTypeStr);
             projectProducerMapper.insert(projectProducer);
             return true;
         }
@@ -119,12 +129,14 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     /**
-     * @param id
      * @return
      * @author zxwang
      */
     @Override
-    public ProjectSelfDTO getSelfProject(Integer id) {
+    public ProjectSelfDTO getSelfProject() {
+        UserSecurity principal = (UserSecurity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Integer id = principal.getId();
+
         ProjectSelfDTO projectSelfDTO = new ProjectSelfDTO();
         List<ProjectDTO> create = new ArrayList<>();
         List<ProjectDTO> join = new ArrayList<>();
@@ -144,8 +156,12 @@ public class ProjectServiceImpl implements ProjectService {
             }
         }
 
-        projectSelfDTO.setCreate(create);
-        projectSelfDTO.setJoin(join);
+        // 去重
+        LinkedHashSet<ProjectDTO> creatHashSet = new LinkedHashSet<>(create);
+        LinkedHashSet<ProjectDTO> joinHashSet = new LinkedHashSet<>(join);
+
+        projectSelfDTO.setCreate(new ArrayList<>(creatHashSet));
+        projectSelfDTO.setJoin(new ArrayList<>(joinHashSet));
         return projectSelfDTO;
     }
 

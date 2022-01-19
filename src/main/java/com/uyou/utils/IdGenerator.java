@@ -17,7 +17,7 @@ public class IdGenerator {
      * 根据时间戳生成唯一id
      */
     public static int getDateId(){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSSS");
+        SimpleDateFormat sdf = new SimpleDateFormat("MMddHHmmss");
         String id = sdf.format(System.currentTimeMillis());
         return Integer.parseInt(id);
     }

@@ -3,7 +3,9 @@ package com.uyou.config;
 import com.uyou.core.LoginValidateAuthenticationProvider;
 import com.uyou.core.handler.LoginFailureHandler;
 import com.uyou.core.handler.LoginSuccessHandler;
+import com.uyou.core.handler.MyLogoutSuccessHandler;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,6 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private LoginFailureHandler loginFailureHandler;
 
+    //登出成功handler
+    @Resource
+    private MyLogoutSuccessHandler myLogoutSuccessHandler;
+
     /**
      * 权限核心配置
      * @param http
@@ -44,13 +50,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 //                .anyRequest().authenticated()//所有请求都需要认证
                 .antMatchers("/user/register").permitAll()
+                .antMatchers(HttpMethod.GET, "/project/project").permitAll()
                 .antMatchers("/**").authenticated()
                 .and()
                 .formLogin() //登录表单
                 .loginProcessingUrl("/user/login")//登录验证url
                 .successHandler(loginSuccessHandler)//成功登录处理器
                 .failureHandler(loginFailureHandler)//失败登录处理器
-                .permitAll();//登录成功后有权限访问所有页面
+                .permitAll()//登录成功后有权限访问所有页面
+                .and()
+                .logout()
+                .logoutUrl("/user/logout")
+                .logoutSuccessHandler(myLogoutSuccessHandler)
+                .deleteCookies("JSESSIONID");
 
         //关闭csrf跨域攻击防御,没有默认登录页
         http.csrf().disable();

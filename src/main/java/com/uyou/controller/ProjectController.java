@@ -1,14 +1,13 @@
 package com.uyou.controller;
 
-import com.uyou.dto.ProjectAllDTO;
-import com.uyou.dto.ProjectCreateDTO;
-import com.uyou.dto.ProjectDetailDTO;
-import com.uyou.dto.ProjectSelfDTO;
+import com.uyou.dto.*;
 import com.uyou.entity.Project;
 import com.uyou.service.ProjectService;
 import com.uyou.utils.ResultWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author zxwang
@@ -38,7 +37,7 @@ public class ProjectController {
 
     @GetMapping("/project")
     public ResultWrapper getAllProject() {
-        ProjectAllDTO allProject = projectService.getAllProject();
+        List<ProjectDTO> allProject = projectService.getAllProject();
         return new ResultWrapper(allProject);
     }
 
@@ -49,8 +48,8 @@ public class ProjectController {
     }
 
     @GetMapping("/project/{id}")
-    public ResultWrapper getProjectById(@PathVariable("id") Integer projectId){
-        ProjectDetailDTO detailProject = projectService.getDetailProject(projectId);
+    public ResultWrapper getProjectById(@PathVariable Integer id){
+        ProjectDetailDTO detailProject = projectService.getDetailProject(id);
         return new ResultWrapper(detailProject);
     }
 }

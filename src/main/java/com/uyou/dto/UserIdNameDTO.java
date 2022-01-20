@@ -4,16 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * @author yjzhang
- * @createdAt 1/15
+ * @createdAt 1/16
  * @description
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProjectAllDTO {
-    private List<ProjectDTO> allProject;
+public class UserIdNameDTO implements Serializable {
+    private Integer id;
+    private String name;
 }

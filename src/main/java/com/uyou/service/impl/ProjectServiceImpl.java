@@ -115,17 +115,16 @@ public class ProjectServiceImpl implements ProjectService {
      * @author yjzhang
      */
     @Override
-    public ProjectAllDTO getAllProject() {
-        ProjectAllDTO projectAllDTO = new ProjectAllDTO();
+    public List<ProjectDTO> getAllProject() {
         List<ProjectDTO> allProject = new ArrayList<>();
         List<Project> projects = projectHelperMapper.selectAll();
         for(Project project:projects){
             List<String> gameTypes = gameTypeHelperMapper.selectTypeByGameId(project.getId());
             ProjectDTO projectDTO = ProjectDTO.fromProject(project);
             projectDTO.setGameType(gameTypes);
+            allProject.add(projectDTO);
         }
-        projectAllDTO.setAllProject(allProject);
-        return projectAllDTO;
+        return allProject;
     }
 
     /**
@@ -174,10 +173,11 @@ public class ProjectServiceImpl implements ProjectService {
 
         ProjectDetailDTO projectDetailDTO = new ProjectDetailDTO();
         Project project = projectMapper.selectByPrimaryKey(projectId);
-        ProjectDTO projectDTO = ProjectDTO.fromProject(project);
+        projectDetailDTO.setId(project.getId());
+        projectDetailDTO.setName(project.getName());
+        projectDetailDTO.setDescription(project.getDescription());
         List<String> gameTypes = gameTypeHelperMapper.selectTypeByGameId(projectId);
-        projectDTO.setGameType(gameTypes);
-        projectDetailDTO.setProjectDTO(projectDTO);
+        projectDetailDTO.setGameType(gameTypes);
 
         List<ProducerTypeDetailDTO> producerTypes = new ArrayList<>();
         List<ProducerType> allProducerType = producerTypeHelperMapper.selectByProjectId(projectId);
@@ -194,9 +194,9 @@ public class ProjectServiceImpl implements ProjectService {
         for(ProjectProducer projectProducer : projectProducers){
             Integer id = projectProducer.getProducerId();
             User user = userMapper.selectByPrimaryKey(id);
-            UserDTO2 userDTO2 = new UserDTO2(id, user.getName());
+            UserIdNameDTO userIdNameDTO = new UserIdNameDTO(id, user.getName());
             String type = projectProducer.getProducerType();
-            producerTypes.get(typeId.get(type)).getMembers().add(userDTO2);
+            producerTypes.get(typeId.get(type)).getMembers().add(userIdNameDTO);
         }
         projectDetailDTO.setProducerTypes(producerTypes);
         return projectDetailDTO;

@@ -3,7 +3,7 @@ package com.uyou.service.impl;
 import com.uyou.core.entity.UserSecurity;
 import com.uyou.dao.UserMapper;
 import com.uyou.dto.UserDTO3;
-import com.uyou.entity.Project;
+import com.uyou.dto.UserNameTypeDTO;
 import com.uyou.entity.User;
 import com.uyou.exception.UserExistException;
 import com.uyou.helperDao.UserHelperMapper;
@@ -11,6 +11,7 @@ import com.uyou.service.UserService;
 import com.uyou.utils.IdGenerator;
 import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -32,23 +33,30 @@ public class UserServiceImpl implements UserService{
     private StringEncryptor stringEncryptor;
 
     /**
-     * @param id
+     * @param
      * @return UserDTO3
      * @author yjzhang
      */
     @Override
-    public UserDTO3 getUserById(Integer id){
-        User user = userMapper.selectByPrimaryKey(id);
-        return new UserDTO3(user.getId(), user.getName(), user.getType());
+    public UserNameTypeDTO getUserById(){
+        UserSecurity principal = (UserSecurity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userMapper.selectByPrimaryKey(principal.getId());
+        return new UserNameTypeDTO(user.getName(), user.getType());
     }
 
     /**
-     * @param user
+     * @param userDTO3
      * @return
      * @author yjzhang
      */
     @Override
-    public void modifyUser(User user){
+    public void modifyUser(UserDTO3 userDTO3){
+        UserSecurity principal = (UserSecurity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = new User();
+        user.setId(principal.getId());
+        user.setPassword(stringEncryptor.encrypt(userDTO3.getPassword()));
+        user.setName(userDTO3.getName());
+        user.setType(userDTO3.getType());
         userMapper.updateByPrimaryKey(user);
     }
 

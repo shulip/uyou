@@ -40,7 +40,7 @@ class ProjectServiceImplTest {
         ProducerTypeDTO p = new ProducerTypeDTO("设计",7);
         projectService.createProject(new ProjectCreateDTO("哈利波特","魔法觉醒",
                 new ArrayList<String>(Arrays.asList("冒险", "卡牌")),
-                new ArrayList<ProducerTypeDTO>(Collections.singletonList(p)),5));
+                new ArrayList<ProducerTypeDTO>(Collections.singletonList(p))));
     }
 
     @Test
@@ -61,33 +61,8 @@ class ProjectServiceImplTest {
 
     @Test
     void getDetailProject() {
-        Integer projectId = 225208331;
-        ProjectDetailDTO projectDetailDTO = new ProjectDetailDTO();
-        Project project = projectMapper.selectByPrimaryKey(projectId);
-        ProjectDTO projectDTO = ProjectDTO.fromProject(project);
-        List<String> gameTypes = gameTypeHelperMapper.selectTypeByGameId(projectId);
-        projectDTO.setGameType(gameTypes);
-        projectDetailDTO.setProjectDTO(projectDTO);
-
-        List<ProducerTypeDetailDTO> producerTypes = new ArrayList<>();
-        List<ProducerType> allProducerType = producerTypeHelperMapper.selectByProjectId(projectId);
-        HashMap<String,Integer> typeId = new HashMap<>();
-        for(ProducerType producerType : allProducerType){
-            String type = producerType.getProducerType();
-            typeId.put(type, producerTypes.size());
-            ProducerTypeDetailDTO producerTypeDetailDTO = new ProducerTypeDetailDTO(
-                    type, producerType.getNeededNumber(),
-                    producerType.getNowNumber(),new ArrayList<>());
-            producerTypes.add(producerTypeDetailDTO);
-        }
+        Integer projectId = 119150743;
         List<ProjectProducer> projectProducers = projectProducerHelperMapper.selectByProjectId(projectId);
-        for(ProjectProducer projectProducer : projectProducers){
-            Integer id = projectProducer.getProducerId();
-            User user = userMapper.selectByPrimaryKey(id);
-            UserDTO2 userDTO2 = new UserDTO2(id, user.getName());
-            String type = projectProducer.getProducerType();
-            producerTypes.get(0).getMembers().add(userDTO2);
-        }
-        projectDetailDTO.setProducerTypes(producerTypes);
+        int a=1;
     }
 }

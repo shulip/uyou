@@ -8,13 +8,13 @@ import java.io.Serializable;
 
 /**
  * @author yjzhang
- * @createdAt 1/16
+ * @createdAt 1/17
  * @description
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO2 implements Serializable {//2表示2个属性
-    private Integer id;
+public class UserNameTypeDTO implements Serializable {
     private String name;
+    private String type;
 }

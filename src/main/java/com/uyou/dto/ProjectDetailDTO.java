@@ -17,6 +17,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProjectDetailDTO implements Serializable {
-    private ProjectDTO projectDTO;
+    private Integer id;
+    private String name;
+    private String description;
+    private List<String> gameType;
     private List<ProducerTypeDetailDTO> producerTypes;
 }

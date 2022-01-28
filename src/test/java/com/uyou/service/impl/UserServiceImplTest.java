@@ -17,23 +17,23 @@ class UserServiceImplTest {
     @Autowired
     private StringEncryptor stringEncryptor;
 
-    @Test
-    void getUserById() {
-        User user = userMapper.selectByPrimaryKey(5);
-        UserNameTypeDTO userNameTypeDTO = new UserNameTypeDTO(user.getName(), user.getType());
-        int a=1;
-    }
-
-    @Test
-    void modifyUser() {
-        System.out.print(stringEncryptor.encrypt("aaa"));
-//        User user = new User();
-//        user.setId(5);
-//        user.setName("x");
-//        user.setPassword(stringEncryptor.encrypt("hhh"));
-//        user.setType("程序员");
-//        userMapper.updateByPrimaryKey(user);
-//        user = userMapper.selectByPrimaryKey(5);
-        int a=1;
-    }
+//    @Test
+//    void getUserById() {
+//        User user = userMapper.selectByPrimaryKey(5);
+//        UserNameTypeDTO userNameTypeDTO = new UserNameTypeDTO(user.getName(), user.getType());
+//        int a=1;
+//    }
+//
+//    @Test
+//    void modifyUser() {
+//        System.out.print(stringEncryptor.encrypt("aaa"));
+////        User user = new User();
+////        user.setId(5);
+////        user.setName("x");
+////        user.setPassword(stringEncryptor.encrypt("hhh"));
+////        user.setType("程序员");
+////        userMapper.updateByPrimaryKey(user);
+////        user = userMapper.selectByPrimaryKey(5);
+//        int a=1;
+//    }
 }

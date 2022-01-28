@@ -25,6 +25,8 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         //登录成功返回
         //设置返回请求头
         response.setContentType("application/json;charset=utf-8");
+        response.setHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));
+        response.setHeader("Access-Control-Allow-Credentials","true");
         //写出流
         PrintWriter out = response.getWriter();
         out.write(JSONObject.toJSONString(new ResultWrapper(), SerializerFeature.WriteMapNullValue, SerializerFeature.WriteNullStringAsEmpty));

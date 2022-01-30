@@ -86,6 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //这里要设置自定义认证
+
         auth.authenticationProvider(loginValidateAuthenticationProvider);
     }
 

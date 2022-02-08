@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://172.19.240.201:3306/uyou?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://124.71.149.35:3306/uyou?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
-    password: ENC(iw69MoykgsZ7cklWmtUZikZpoltmkMh5fdc546SP2C6KoyVMT4v6UO0g7KH1RQGq)
+    password: root
 server:
   port: 8080
 mybatis:

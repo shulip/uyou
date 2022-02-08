@@ -192,11 +192,13 @@ public class ProjectServiceImpl implements ProjectService {
         }
         List<ProjectProducer> projectProducers = projectProducerHelperMapper.selectByProjectId(projectId);
         for(ProjectProducer projectProducer : projectProducers){
-            Integer id = projectProducer.getProducerId();
-            User user = userMapper.selectByPrimaryKey(id);
-            UserIdNameDTO userIdNameDTO = new UserIdNameDTO(id, user.getName());
             String type = projectProducer.getProducerType();
-            producerTypes.get(typeId.get(type)).getMembers().add(userIdNameDTO);
+            if(typeId.containsKey(type)){
+                Integer id = projectProducer.getProducerId();
+                User user = userMapper.selectByPrimaryKey(id);
+                UserIdNameDTO userIdNameDTO = new UserIdNameDTO(id, user.getName());
+                producerTypes.get(typeId.get(type)).getMembers().add(userIdNameDTO);
+            }
         }
         projectDetailDTO.setProducerTypes(producerTypes);
         return projectDetailDTO;

@@ -1,7 +1,6 @@
 package com.uyou.controller;
 
 import com.uyou.dto.*;
-import com.uyou.entity.Project;
 import com.uyou.service.ProjectService;
 import com.uyou.utils.ResultWrapper;
 import org.springframework.beans.factory.annotation.Autowired;

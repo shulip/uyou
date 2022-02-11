@@ -3,8 +3,6 @@ package com.uyou.service;
 
 import com.uyou.dto.UserDTO3;
 import com.uyou.dto.UserNameTypeDTO;
-import com.uyou.entity.User;
-import com.uyou.exception.UserExistException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
@@ -17,5 +15,5 @@ public interface UserService extends UserDetailsService {
 
     void modifyUser(UserDTO3 userDTO3);
 
-    int register(String name,String password,String type) throws UserExistException;
+    int register(String name,String password,String type);
 }

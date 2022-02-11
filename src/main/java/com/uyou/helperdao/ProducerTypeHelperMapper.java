@@ -1,4 +1,4 @@
-package com.uyou.helperDao;
+package com.uyou.helperdao;
 
 import com.uyou.entity.ProducerType;
 import org.apache.ibatis.annotations.Mapper;

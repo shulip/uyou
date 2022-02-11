@@ -4,10 +4,8 @@ import com.uyou.core.LoginValidateAuthenticationProvider;
 import com.uyou.core.handler.LoginFailureHandler;
 import com.uyou.core.handler.LoginSuccessHandler;
 import com.uyou.core.handler.MyLogoutSuccessHandler;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,7 +14,6 @@ import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 import javax.annotation.Resource;
 
@@ -72,8 +69,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                 .accessDeniedHandler(new CustomAccessDeniedHandler());
-//                .and()
-//                .addFilterBefore(new WebSecurityCorsFilter(), ChannelProcessingFilter.class);
 
         //关闭csrf跨域攻击防御,没有默认登录页
         http.cors()

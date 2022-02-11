@@ -11,10 +11,13 @@ import java.io.Serializable;
  */
 @Data
 public class UserExistException extends RuntimeException implements Serializable {
-    private int code;
+    private static final int CODE = 500;
 
     public UserExistException(String message) {
         super(message);
-        code = 500;
+    }
+
+    public int getCode(){
+        return CODE;
     }
 }

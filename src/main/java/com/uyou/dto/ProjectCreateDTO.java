@@ -37,11 +37,11 @@ public class ProjectCreateDTO implements Serializable {
         List<GameType> gameTypeList = new ArrayList<>();
 
         for (String type : gameType) {
-            GameType gameType = new GameType();
-            gameType.setGameId(projectId);
-            gameType.setGameType(type);
+            GameType gameTypeAdd = new GameType();
+            gameTypeAdd.setGameId(projectId);
+            gameTypeAdd.setGameType(type);
 
-            gameTypeList.add(gameType);
+            gameTypeList.add(gameTypeAdd);
         }
 
         return gameTypeList;

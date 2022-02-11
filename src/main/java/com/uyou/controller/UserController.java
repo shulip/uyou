@@ -2,7 +2,6 @@ package com.uyou.controller;
 
 import com.uyou.dto.UserDTO3;
 import com.uyou.dto.UserNameTypeDTO;
-import com.uyou.entity.User;
 import com.uyou.exception.UserExistException;
 import com.uyou.service.UserService;
 import com.uyou.utils.ResultWrapper;

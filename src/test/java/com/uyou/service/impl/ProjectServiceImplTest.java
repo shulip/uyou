@@ -2,22 +2,15 @@ package com.uyou.service.impl;
 
 import com.uyou.dao.ProjectMapper;
 import com.uyou.dao.UserMapper;
-import com.uyou.dto.*;
-import com.uyou.entity.ProducerType;
-import com.uyou.entity.Project;
-import com.uyou.entity.ProjectProducer;
-import com.uyou.entity.User;
-import com.uyou.helperDao.GameTypeHelperMapper;
-import com.uyou.helperDao.ProducerTypeHelperMapper;
-import com.uyou.helperDao.ProjectHelperMapper;
-import com.uyou.helperDao.ProjectProducerHelperMapper;
+import com.uyou.helperdao.GameTypeHelperMapper;
+import com.uyou.helperdao.ProducerTypeHelperMapper;
+import com.uyou.helperdao.ProjectHelperMapper;
+import com.uyou.helperdao.ProjectProducerHelperMapper;
 import com.uyou.service.ProjectService;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.util.*;
 
 @SpringBootTest
 class ProjectServiceImplTest {

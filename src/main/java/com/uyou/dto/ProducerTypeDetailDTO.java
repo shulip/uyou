@@ -19,5 +19,5 @@ public class ProducerTypeDetailDTO implements Serializable {
     private String producerType;
     private Integer neededNumber;
     private Integer nowNumber;
-    List<UserIdNameDTO> members;
+    private List<UserIdNameDTO> members;
 }

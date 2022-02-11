@@ -6,7 +6,7 @@ import com.uyou.dto.UserDTO3;
 import com.uyou.dto.UserNameTypeDTO;
 import com.uyou.entity.User;
 import com.uyou.exception.UserExistException;
-import com.uyou.helperDao.UserHelperMapper;
+import com.uyou.helperdao.UserHelperMapper;
 import com.uyou.service.UserService;
 import com.uyou.utils.IdGenerator;
 import org.jasypt.encryption.StringEncryptor;
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public int register(String name, String password, String type) throws UserExistException {
+    public int register(String name, String password, String type){
         UserSecurity user = userHelperMapper.findUserByUsername(name);
         if (null != user)
             throw new UserExistException("该用户名已存在！");
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username){
         UserSecurity user = userHelperMapper.findUserByUsername(username);
         if (user == null)
             throw new UsernameNotFoundException("不存在该用户!");

@@ -1,4 +1,4 @@
-package com.uyou.helperDao;
+package com.uyou.helperdao;
 
 import com.uyou.core.entity.UserSecurity;
 import com.uyou.entity.User;

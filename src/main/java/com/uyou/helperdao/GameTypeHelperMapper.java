@@ -1,6 +1,5 @@
-package com.uyou.helperDao;
+package com.uyou.helperdao;
 
-import com.uyou.entity.GameType;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

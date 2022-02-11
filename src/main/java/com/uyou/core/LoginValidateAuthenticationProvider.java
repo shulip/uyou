@@ -6,7 +6,6 @@ import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 /**
@@ -22,7 +21,7 @@ public class LoginValidateAuthenticationProvider implements AuthenticationProvid
     private StringEncryptor stringEncryptor;
 
     @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication){
         //获取输入的用户名
         String username = authentication.getName();
         //获取输入的明文

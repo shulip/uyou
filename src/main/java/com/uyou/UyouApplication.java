@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan({"com.uyou.dao","com.uyou.helperDao"})
+@MapperScan({"com.uyou.dao","com.uyou.helperdao"})
 public class UyouApplication {
 
     public static void main(String[] args) {

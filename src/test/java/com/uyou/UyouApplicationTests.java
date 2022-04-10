@@ -17,10 +17,10 @@ class UyouApplicationTests {
     @Test
     void contextLoads() {
         //加密方法
-        System.out.println(stringEncryptor.encrypt("hhh"));
-        System.out.println(stringEncryptor.encrypt("123456"));
+//        System.out.println(stringEncryptor.encrypt("hhh"));
+//        System.out.println(stringEncryptor.encrypt("123456"));
         //解密方法
-//        System.out.println(stringEncryptor.decrypt("B6RKhwBTDrW/dbcGNrdy9d+jk9EgzgJ8oIkwaywdx1QwE7BsmxtRFW9cNvY+XXuj"));
+        System.out.println(stringEncryptor.decrypt("GfyzJSzmCshJVzYew6WnyEZaAg2VIbBIDoCxBzM/9tNMDFgYiSgfD2h4GTb28nqs"));
 //        System.out.println(stringEncryptor.decrypt("OAGsDE0lm2yYDtSs3CHe6EAiy+ovq+mCKqgO1kCchf629zW4kM7O45H8ABW7Wvx6"));
     }
 
